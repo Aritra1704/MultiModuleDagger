@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    def ver_Dagger = '2.24'
+    def ver_OKHTTP = '3.9.1'
+    def ver_GSON = '2.8.5'
+    def ver_Retrofit = '2.3.0'
+    def ver_RxJava = '2.1.15'
+    def ver_RxAndroid = '2.0.2'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$ver_Dagger"
+    implementation "com.google.dagger:dagger-android:$ver_Dagger"
+    implementation "com.google.dagger:dagger-android-support:$ver_Dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$ver_Dagger"
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:$ver_RxJava"
+    implementation "io.reactivex.rxjava2:rxandroid:$ver_RxAndroid"
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:$ver_Retrofit") {
+        exclude module: 'okhttp'
+    }
+    implementation "com.squareup.retrofit2:converter-gson:$ver_Retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$ver_Retrofit"
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:logging-interceptor:$ver_OKHTTP"
+    implementation "com.squareup.okhttp3:okhttp:$ver_OKHTTP"
+
+    // GSON
+    implementation "com.google.code.gson:gson:$ver_GSON"
+}

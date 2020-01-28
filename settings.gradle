@@ -1,0 +1,2 @@
+include ':app', ':samplemodule1', ':samplelibrary1'
+rootProject.name='MultiModuleDagger'
