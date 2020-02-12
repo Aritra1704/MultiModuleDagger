@@ -2,6 +2,9 @@ package com.arpaul.multimoduledagger;
 
 import android.os.Bundle;
 
+import com.arpaul.multimoduledagger.component.AppComponent;
+import com.arpaul.multimoduledagger.component.DaggerAppComponent;
+import com.arpaul.multimoduledagger.model.AppModel;
 import com.arpaul.samplelibrary1.dummy.DummyClass;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -9,9 +12,12 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import javax.inject.Inject;
 
 
 //HOW TO CREATE AAR FILE
@@ -19,6 +25,11 @@ import android.view.MenuItem;
 // https://proandroiddev.com/using-dagger-in-a-multi-module-project-1e6af8f06ffc
 
 public class MainActivity extends AppCompatActivity {
+
+    private String TAG = MainActivity.class.getSimpleName();
+
+    @Inject
+    AppModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +47,23 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        AppComponent component = DaggerAppComponent.builder().build();
+        component.inject(this);
+
+//        model = component.getModel();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(model != null) {
+            Log.v(TAG, model.getModelName());
+        } else {
+            Log.v(TAG, "null");
+        }
     }
 
     @Override

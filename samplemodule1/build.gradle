@@ -26,6 +26,8 @@ android {
 }
 
 dependencies {
+    def ver_Dagger = '2.24'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -33,4 +35,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$ver_Dagger"
+    implementation "com.google.dagger:dagger-android:$ver_Dagger"
+    implementation "com.google.dagger:dagger-android-support:$ver_Dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$ver_Dagger"
 }
