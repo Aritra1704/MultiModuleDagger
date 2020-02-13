@@ -1,8 +1,6 @@
 package com.arpaul.multimoduledagger.component;
 
-import android.app.Activity;
-
-import com.arpaul.multimoduledagger.MainActivity;
+import com.arpaul.multimoduledagger.BaseAppActivity;
 import com.arpaul.multimoduledagger.model.AppModel;
 import com.arpaul.multimoduledagger.modules.AppModelProvider;
 
@@ -15,7 +13,7 @@ import dagger.Component;
         AppModelProvider.class
 })
 public interface AppComponent {
-    void inject(MainActivity context);
+    void inject(BaseAppActivity context);
 
     AppModel getModel();
 }

@@ -62,4 +62,6 @@ dependencies {
 
     // GSON
     implementation "com.google.code.gson:gson:$ver_GSON"
+
+    api project(":samplemodule1")
 }

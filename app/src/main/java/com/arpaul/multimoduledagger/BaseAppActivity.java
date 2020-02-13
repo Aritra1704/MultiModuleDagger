@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.arpaul.multimoduledagger.component.AppComponent;
 import com.arpaul.multimoduledagger.component.DaggerAppComponent;
 import com.arpaul.multimoduledagger.model.AppModel;
+import com.arpaul.samplelibrary1.LibrarySingleTon;
 import com.arpaul.samplelibrary1.dummy.DummyClass;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,9 +25,9 @@ import javax.inject.Inject;
 // https://dominoc925.blogspot.com/2015/09/how-to-create-and-use-android-archive.html
 // https://proandroiddev.com/using-dagger-in-a-multi-module-project-1e6af8f06ffc
 
-public class MainActivity extends AppCompatActivity {
+public class BaseAppActivity extends AppCompatActivity {
 
-    private String TAG = MainActivity.class.getSimpleName();
+    private String TAG = BaseAppActivity.class.getSimpleName();
 
     @Inject
     AppModel model;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_base_app);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 DummyClass dummy = new DummyClass();
                 Snackbar.make(view, dummy.getDummy_text(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                LibrarySingleTon.getINSTANCE().initSampleModule(BaseAppActivity.this);
             }
         });
 
